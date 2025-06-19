@@ -69,7 +69,12 @@ test('爬取台灣郵遞區號', async ({ page }) => {
     }
   }
 
-  // 9. 輸出到 zipcode.json
-  fs.writeFileSync('zipcode.json', JSON.stringify(result, null, 2), 'utf-8');
+  // 9. 輸出到 exports/tw-zipcode.json
+  const exportDir = 'exports';
+  const exportPath = `${exportDir}/tw-zipcode.json`;
+  if (!fs.existsSync(exportDir)) {
+    fs.mkdirSync(exportDir);
+  }
+  fs.writeFileSync(exportPath, JSON.stringify(result, null, 2), 'utf-8');
   expect(result.length).toBeGreaterThan(0);
 });
